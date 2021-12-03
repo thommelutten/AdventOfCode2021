@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Sonar_Sweep.Test</RootNamespace>
+    <RootNamespace>_3_Binary_Diagnostics.Test</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -15,11 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\1-Sonar-Sweep\1-Sonar-Sweep.csproj" />
+    <ProjectReference Include="..\3-Binary-Diagnostics\3-Binary-Diagnostic.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="report.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="smallTest.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
