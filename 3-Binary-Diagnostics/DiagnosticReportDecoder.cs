@@ -28,7 +28,7 @@ namespace _3_Binary_Diagnostics
             for (int bitIndex = 0; bitIndex < inputBitSequenceLength; bitIndex++)
                 gammaInBits += FindCommonBitsAtPosition(report, bitIndex);
 
-            int gamma = ConvertStringBinaryToInt(report.First());
+            int gamma = ConvertStringBinaryToInt(gammaInBits);
 
             return gamma;
         }
@@ -44,7 +44,7 @@ namespace _3_Binary_Diagnostics
                 epsilonInBits += commonBit.Equals("0") ? "1" : "0";
             }
 
-            int epsilon = ConvertStringBinaryToInt(report.First());
+            int epsilon = ConvertStringBinaryToInt(epsilonInBits);
 
             return epsilon;
         }
