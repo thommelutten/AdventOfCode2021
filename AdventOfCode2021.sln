@@ -15,9 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Binary-Diagnostic", "3-Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-Binary-Diagnostic.Test", "3-Binary-Diagnostics.Test\3-Binary-Diagnostic.Test.csproj", "{E95D4C72-A6E7-486A-9236-69A343402A1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-Giant-Squid", "4-Giant-Squid\4-Giant-Squid.csproj", "{AFD5CCC7-45DE-4D51-8CA2-93B6B141BC8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4-Giant-Squid", "4-Giant-Squid\4-Giant-Squid.csproj", "{AFD5CCC7-45DE-4D51-8CA2-93B6B141BC8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-Giant-Squid.Test", "4-Giant-Squid.Test\4-Giant-Squid.Test.csproj", "{C886DAE0-4220-4F0B-8251-3F08A69FFD6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4-Giant-Squid.Test", "4-Giant-Squid.Test\4-Giant-Squid.Test.csproj", "{C886DAE0-4220-4F0B-8251-3F08A69FFD6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-Hydrothermal-Venture", "5-Hydrothermal-Venture\5-Hydrothermal-Venture.csproj", "{6EDF3808-3149-4FFD-9229-8DC12F68D621}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-Hydrothermal-Venture.Test", "5-Hydrothermal-Venture.Test\5-Hydrothermal-Venture.Test.csproj", "{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{C886DAE0-4220-4F0B-8251-3F08A69FFD6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C886DAE0-4220-4F0B-8251-3F08A69FFD6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C886DAE0-4220-4F0B-8251-3F08A69FFD6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EDF3808-3149-4FFD-9229-8DC12F68D621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDF3808-3149-4FFD-9229-8DC12F68D621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDF3808-3149-4FFD-9229-8DC12F68D621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDF3808-3149-4FFD-9229-8DC12F68D621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
