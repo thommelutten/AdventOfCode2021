@@ -8,6 +8,8 @@ namespace _5_Hydrothermal_Venture
     {
         private List<List<int>> Grid = new List<List<int>>();
 
+        public bool UseDiagonal { get; set; }
+
         public List<List<int>> getGrid()
         {
             return Grid;
@@ -29,20 +31,73 @@ namespace _5_Hydrothermal_Venture
 
         public void AddVentsLine((int startX, int startY, int endX, int endY) coordinates)
         {
+            if (LineNegativeDescend(coordinates))
+                coordinates = FlipLineToPositiveDirection(coordinates);
+
             if (coordinates.startY == coordinates.endY)
+            {
                 AddHorizontalLine(coordinates);
-
-            if (coordinates.startX == coordinates.endX)
+            }
+            else if (coordinates.startX == coordinates.endX) 
+            {
                 AddVerticalLine(coordinates);
+            }
+            else if(UseDiagonal)
+            {
+                AddDiagonalLine(coordinates);
+            }
+                
 
+
+        }
+
+        private void AddDiagonalLine((int startX, int startY, int endX, int endY) coordinates)
+        {
+            int positionsToPlace = coordinates.endX - coordinates.startX;
+
+            for (int positionCounter = 0; positionCounter < positionsToPlace; positionCounter++)
+            {
+                var xCoordinate = coordinates.startX + positionCounter;
+                var yCoordinate = coordinates.startY + positionCounter;
+
+                if (!VerticalLineExist(xCoordinate))
+                    CreateVerticalLines(xCoordinate);
+
+                if (!HorizontalLineExist(yCoordinate, xCoordinate))
+                    CreateHorizontalPositions(yCoordinate, xCoordinate);
+
+                Grid[yCoordinate][xCoordinate] += 1;
+            }
+        }
+
+        public (int startX, int startY, int endX, int endY) FlipLineToPositiveDirection((int startX, int startY, int endX, int endY) coordinates)
+        {
+            if(coordinates.startX > coordinates.endX)
+            {
+                var temp = coordinates.startX;
+                coordinates.startX = coordinates.endX;
+                coordinates.endX = temp;
+            }
+
+            if(coordinates.startY > coordinates.endY)
+            {
+                var temp = coordinates.startY;
+                coordinates.startY = coordinates.endY;
+                coordinates.endY = temp;
+            }
+
+            return coordinates;
+        }
+
+        private bool LineNegativeDescend((int startX, int startY, int endX, int endY) coordinates)
+        {
+            return (coordinates.startX > coordinates.endX || coordinates.startY > coordinates.endY);
         }
 
         private void AddVerticalLine((int startX, int startY, int endX, int endY) coordinates)
         {
             if (!VerticalLineExist(coordinates.endY))
                 CreateVerticalLines(coordinates.endY);
-
-            
 
             for (int index = coordinates.startY; index <= coordinates.endY; index++)
             {
@@ -60,7 +115,7 @@ namespace _5_Hydrothermal_Venture
             if(!HorizontalLineExist(coordinates.endY, coordinates.endX))
                 CreateHorizontalPositions(coordinates.endY, coordinates.endX);
 
-            for (int index = coordinates.startX; index < coordinates.endX; index++)
+            for (int index = coordinates.startX; index <= coordinates.endX; index++)
                 Grid[coordinates.startY][index] += 1;
         }
 
@@ -73,7 +128,7 @@ namespace _5_Hydrothermal_Venture
 
         private bool HorizontalLineExist(int endY, int endX)
         {
-            return Grid[endY].Count - 1 >= endX;
+            return (Grid[endY].Count - 1) >= endX;
         }
 
         private void CreateVerticalLines(int endY)
@@ -85,7 +140,7 @@ namespace _5_Hydrothermal_Venture
 
         private bool VerticalLineExist(int endY)
         {
-            return Grid.Count-1 >= endY;
+            return (Grid.Count - 1) >= endY;
         }
     }
 }
