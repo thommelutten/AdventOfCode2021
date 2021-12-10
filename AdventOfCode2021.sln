@@ -19,9 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4-Giant-Squid", "4-Giant-Sq
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4-Giant-Squid.Test", "4-Giant-Squid.Test\4-Giant-Squid.Test.csproj", "{C886DAE0-4220-4F0B-8251-3F08A69FFD6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-Hydrothermal-Venture", "5-Hydrothermal-Venture\5-Hydrothermal-Venture.csproj", "{6EDF3808-3149-4FFD-9229-8DC12F68D621}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-Hydrothermal-Venture", "5-Hydrothermal-Venture\5-Hydrothermal-Venture.csproj", "{6EDF3808-3149-4FFD-9229-8DC12F68D621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-Hydrothermal-Venture.Test", "5-Hydrothermal-Venture.Test\5-Hydrothermal-Venture.Test.csproj", "{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-Hydrothermal-Venture.Test", "5-Hydrothermal-Venture.Test\5-Hydrothermal-Venture.Test.csproj", "{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-Lanternfish", "6-Lanternfish\6-Lanternfish.csproj", "{371499E1-644F-4C42-9BC2-99D65DD08BFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-Lanternfish.Test", "6-Lanternfish.Test\6-Lanternfish.Test.csproj", "{139BF4A1-DD42-466E-8B68-9A811C4B7E55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{371499E1-644F-4C42-9BC2-99D65DD08BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{371499E1-644F-4C42-9BC2-99D65DD08BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{371499E1-644F-4C42-9BC2-99D65DD08BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{371499E1-644F-4C42-9BC2-99D65DD08BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139BF4A1-DD42-466E-8B68-9A811C4B7E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139BF4A1-DD42-466E-8B68-9A811C4B7E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139BF4A1-DD42-466E-8B68-9A811C4B7E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139BF4A1-DD42-466E-8B68-9A811C4B7E55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
