@@ -134,6 +134,51 @@ namespace _5_Hydrothermal_Venture.Test
         }
 
         [TestMethod]
+        public void TestVentsGridMixedDiagonalLineGoingTowardsY()
+        {
+            string line = "8,2 -> 5,5";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            bool shouldBeTrue = ventsGrid.IsMixedDiagonalLineGoingTowardsY(coordinates);
+            Assert.IsTrue(shouldBeTrue);
+        }
+
+        [TestMethod]
+        public void TestVentsGridMixedDiagonalLineGoingTowardsX()
+        {
+            string line = "0,8 -> 8,0";
+
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            bool shouldBeTrue = ventsGrid.IsMixedDiagonalLineGoingTowardsX(coordinates);
+            Assert.IsTrue(shouldBeTrue);
+        }
+
+        [TestMethod]
+        public void TestVentsGridHomogenousPositiveDiagonalLine()
+        {
+            string line = "0,0 -> 8,8";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            bool shouldBeTrue = ventsGrid.IsHomogenousPositiveDiagonalLine(coordinates);
+            Assert.IsTrue(shouldBeTrue);
+        }
+
+        [TestMethod]
+        public void TestVentsGridHomogenousNegativeDiagonalLine()
+        {
+            string line = "8,8 -> 0,0";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            bool shouldBeTrue = ventsGrid.IsHomogenousNegativeDiagonalLine(coordinates);
+            Assert.IsTrue(shouldBeTrue);
+        }
+
+        [TestMethod]
         public void TestVentsGridDiagonalLine()
         {
             VentsGrid ventsGrid = new VentsGrid();
@@ -241,6 +286,55 @@ namespace _5_Hydrothermal_Venture.Test
                 positions += gridLine.Where(position => position >= 2).Count();
             }
 
+            Assert.AreEqual(1, grid[0][0]);
+            Assert.AreEqual(1, grid[0][2]);
+            Assert.AreEqual(1, grid[0][7]);
+            Assert.AreEqual(1, grid[0][8]);
+
+            Assert.AreEqual(1, grid[1][1]);
+            Assert.AreEqual(1, grid[1][2]);
+            Assert.AreEqual(1, grid[1][3]);
+            Assert.AreEqual(2, grid[1][7]);
+
+            Assert.AreEqual(2, grid[2][2]);
+            Assert.AreEqual(1, grid[2][4]);
+            Assert.AreEqual(1, grid[2][6]);
+            Assert.AreEqual(1, grid[2][7]);
+            Assert.AreEqual(1, grid[2][8]);
+
+            Assert.AreEqual(1, grid[3][3]);
+            Assert.AreEqual(2, grid[3][5]);
+            Assert.AreEqual(2, grid[3][7]);
+
+            Assert.AreEqual(1, grid[4][1]);
+            Assert.AreEqual(1, grid[4][2]);
+            Assert.AreEqual(2, grid[4][3]);
+            Assert.AreEqual(3, grid[4][4]);
+            Assert.AreEqual(1, grid[4][5]);
+            Assert.AreEqual(3, grid[4][6]);
+            Assert.AreEqual(2, grid[4][7]);
+            Assert.AreEqual(1, grid[4][8]);
+            Assert.AreEqual(1, grid[4][9]);
+
+            Assert.AreEqual(1, grid[5][3]);
+            Assert.AreEqual(2, grid[5][5]);
+
+            Assert.AreEqual(1, grid[6][2]);
+            Assert.AreEqual(1, grid[6][6]);
+
+            Assert.AreEqual(1, grid[7][1]);
+            Assert.AreEqual(1, grid[7][7]);
+
+            Assert.AreEqual(1, grid[8][0]);
+            Assert.AreEqual(1, grid[8][8]);
+
+            Assert.AreEqual(2, grid[9][0]);
+            Assert.AreEqual(2, grid[9][1]);
+            Assert.AreEqual(2, grid[9][2]);
+            Assert.AreEqual(1, grid[9][3]);
+            Assert.AreEqual(1, grid[9][4]);
+            Assert.AreEqual(1, grid[9][5]);
+
             Assert.AreEqual(12, positions);
         }
 
@@ -343,9 +437,53 @@ namespace _5_Hydrothermal_Venture.Test
         }
 
         [TestMethod]
+        public void TestVentsGridLineIsStraigth()
+        {
+            VentsGrid ventsGrid = new VentsGrid();
+
+            string horizontalPositive = "0,0 -> 2,0";
+            var coordinates = ventsGrid.ParseLine(horizontalPositive);
+            bool horizontalPositiveIsStraigth = ventsGrid.LineIsStraigth(coordinates);
+            Assert.IsTrue(horizontalPositiveIsStraigth);
+
+            string horizontalNegative = "2,0 -> 0,0";
+            coordinates = ventsGrid.ParseLine(horizontalNegative);
+            var horizontalNegativeIsStraigth = ventsGrid.LineIsStraigth(coordinates);
+            Assert.IsTrue(horizontalNegativeIsStraigth);
+
+            string verticalPositive = "0,0 -> 0,2";
+            coordinates = ventsGrid.ParseLine(verticalPositive);
+            var verticalPositiveIsStraigth = ventsGrid.LineIsStraigth(coordinates);
+            Assert.IsTrue(verticalPositiveIsStraigth);
+
+            string verticalNegative = "0,2 -> 0,0";
+            coordinates = ventsGrid.ParseLine(verticalNegative);
+            var verticalNegativeIsStraigth = ventsGrid.LineIsStraigth(coordinates);
+            Assert.IsTrue(verticalNegativeIsStraigth);
+        }
+
+        [TestMethod]
         public void TestVentsGrid6420Line()
         {
             string line = "6,4 -> 2,0";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            ventsGrid.UseDiagonal = true;
+            ventsGrid.AddVentsLine(coordinates);
+
+            var grid = ventsGrid.getGrid();
+            Assert.AreEqual(1, grid[0][2]);
+            Assert.AreEqual(1, grid[1][3]);
+            Assert.AreEqual(1, grid[2][4]);
+            Assert.AreEqual(1, grid[3][5]);
+            Assert.AreEqual(1, grid[4][6]);
+        }
+
+        [TestMethod]
+        public void TestVentsGrid2064Line()
+        {
+            string line = "2,0 -> 6,4";
             VentsGrid ventsGrid = new VentsGrid();
 
             var coordinates = ventsGrid.ParseLine(line);
@@ -381,6 +519,26 @@ namespace _5_Hydrothermal_Venture.Test
         }
 
         [TestMethod]
+        public void TestVentsGrid3494Line()
+        {
+            string line = "3,4 -> 9,4";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            ventsGrid.UseDiagonal = true;
+            ventsGrid.AddVentsLine(coordinates);
+
+            var grid = ventsGrid.getGrid();
+            Assert.AreEqual(1, grid[4][3]);
+            Assert.AreEqual(1, grid[4][4]);
+            Assert.AreEqual(1, grid[4][5]);
+            Assert.AreEqual(1, grid[4][6]);
+            Assert.AreEqual(1, grid[4][7]);
+            Assert.AreEqual(1, grid[4][8]);
+            Assert.AreEqual(1, grid[4][9]);
+        }
+
+        [TestMethod]
         public void TestVentsGrid0929Line()
         {
             string line = "0,9 -> 2,9";
@@ -397,9 +555,41 @@ namespace _5_Hydrothermal_Venture.Test
         }
 
         [TestMethod]
+        public void TestVentsGrid2909Line()
+        {
+            string line = "2,9 -> 0,9";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            ventsGrid.UseDiagonal = true;
+            ventsGrid.AddVentsLine(coordinates);
+
+            var grid = ventsGrid.getGrid();
+            Assert.AreEqual(1, grid[9][0]);
+            Assert.AreEqual(1, grid[9][1]);
+            Assert.AreEqual(1, grid[9][2]);
+        }
+
+        [TestMethod]
         public void TestVentsGrid3414Line()
         {
             string line = "3,4 -> 1,4";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            ventsGrid.UseDiagonal = true;
+            ventsGrid.AddVentsLine(coordinates);
+
+            var grid = ventsGrid.getGrid();
+            Assert.AreEqual(1, grid[4][1]);
+            Assert.AreEqual(1, grid[4][2]);
+            Assert.AreEqual(1, grid[4][3]);
+        }
+
+        [TestMethod]
+        public void TestVentsGrid1434Line()
+        {
+            string line = "1,4 -> 3,4";
             VentsGrid ventsGrid = new VentsGrid();
 
             var coordinates = ventsGrid.ParseLine(line);
@@ -435,9 +625,49 @@ namespace _5_Hydrothermal_Venture.Test
         }
 
         [TestMethod]
+        public void TestVentsGrid8800Line()
+        {
+            string line = "8,8 -> 0,0";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            ventsGrid.UseDiagonal = true;
+            ventsGrid.AddVentsLine(coordinates);
+
+            var grid = ventsGrid.getGrid();
+            Assert.AreEqual(1, grid[0][0]);
+            Assert.AreEqual(1, grid[1][1]);
+            Assert.AreEqual(1, grid[2][2]);
+            Assert.AreEqual(1, grid[3][3]);
+            Assert.AreEqual(1, grid[4][4]);
+            Assert.AreEqual(1, grid[5][5]);
+            Assert.AreEqual(1, grid[6][6]);
+            Assert.AreEqual(1, grid[7][7]);
+            Assert.AreEqual(1, grid[8][8]);
+        }
+
+
+        [TestMethod]
         public void TestVentsGrid5582Line()
         {
             string line = "5,5 -> 8,2";
+            VentsGrid ventsGrid = new VentsGrid();
+
+            var coordinates = ventsGrid.ParseLine(line);
+            ventsGrid.UseDiagonal = true;
+            ventsGrid.AddVentsLine(coordinates);
+
+            var grid = ventsGrid.getGrid();
+            Assert.AreEqual(1, grid[5][5]);
+            Assert.AreEqual(1, grid[4][6]);
+            Assert.AreEqual(1, grid[3][7]);
+            Assert.AreEqual(1, grid[2][8]);
+        }
+
+        [TestMethod]
+        public void TestVentsGrid8255Line()
+        {
+            string line = "8,2 -> 5,5";
             VentsGrid ventsGrid = new VentsGrid();
 
             var coordinates = ventsGrid.ParseLine(line);

@@ -21,24 +21,26 @@ namespace _5_Hydrothermal_Venture
             string[] startCoordinates = parts[0].Split(',');
             string[] endCoordinates = parts[2].Split(',');
 
-            int startX = int.Parse(startCoordinates[0]);
-            int startY = int.Parse(startCoordinates[1]);
-            int endX = int.Parse(endCoordinates[0]);
-            int endY = int.Parse(endCoordinates[1]);
 
+            bool startXParsed = int.TryParse(startCoordinates[0], out int startX);
+            bool startYParsed = int.TryParse(startCoordinates[1], out int startY);
+            bool endXParsed = int.TryParse(endCoordinates[0], out int endX);
+            bool endYParsed = int.TryParse(endCoordinates[1], out int endY);
+
+            if (!(startXParsed || startYParsed || endXParsed || endYParsed)) throw new Exception();
             return (startX, startY, endX, endY);
         }
 
         public void AddVentsLine((int startX, int startY, int endX, int endY) coordinates)
         {
-            
-            coordinates = FlipLineToPositiveDirection(coordinates);
+            if(LineIsStraigth(coordinates))
+                coordinates = FlipLineToPositiveDirection(coordinates);
 
-            if (coordinates.startY == coordinates.endY)
+            if (LineIsHorizontal(coordinates))
             {
                 AddHorizontalLine(coordinates);
             }
-            else if (coordinates.startX == coordinates.endX)
+            else if (LineIsVertical(coordinates))
             {
                 AddVerticalLine(coordinates);
             }
@@ -49,49 +51,68 @@ namespace _5_Hydrothermal_Venture
 
         }
 
-        private bool LineNotDiagonal((int startX, int startY, int endX, int endY) coordinates)
+        private bool LineIsHorizontal((int startX, int startY, int endX, int endY) coordinates)
         {
-            return !(((coordinates.startX == coordinates.startY) && (coordinates.endX == coordinates.endY)) ||
-                ((coordinates.startX == coordinates.endY) && (coordinates.endX == coordinates.startY)));
+            return (coordinates.startY == coordinates.endY) && (coordinates.startX != coordinates.endX);
+        }
+
+        private bool LineIsVertical((int startX, int startY, int endX, int endY) coordinates)
+        {
+            return (coordinates.startX == coordinates.endX) && (coordinates.startY != coordinates.endY);
+        }
+
+        public bool LineIsStraigth((int startX, int startY, int endX, int endY) coordinates)
+        {
+            return ((coordinates.startX == coordinates.endX) && (coordinates.startY != coordinates.endY)) ||
+                ((coordinates.startY == coordinates.endY) && (coordinates.startX != coordinates.endX));
+        }
+
+        public bool IsMixedDiagonalLineGoingTowardsY((int startX, int startY, int endX, int endY) coordinates)
+        {
+            // 8,0 -> 0,8
+            return ((coordinates.startX - coordinates.endX) == (coordinates.endY - coordinates.startY)) &&
+                (coordinates.startX > coordinates.startY);
+        }
+
+        public bool IsMixedDiagonalLineGoingTowardsX((int startX, int startY, int endX, int endY) coordinates)
+        {
+            // 0,8 -> 8,0
+            return ((coordinates.endX - coordinates.startX) == (coordinates.startY - coordinates.endY)) &&
+                coordinates.startY >= coordinates.startX;
         }
 
         private void AddDiagonalLine((int startX, int startY, int endX, int endY) coordinates)
         {
             int positionsToPlace = coordinates.startX > coordinates.endX ? (coordinates.startX - coordinates.endX) : (coordinates.endX - coordinates.startX);
 
-            bool backwardsDiagonal = false;
-            if ((coordinates.endX < coordinates.startX) && (coordinates.endY < coordinates.startY))
-                backwardsDiagonal = true;
-
             for (int positionCounter = 0; positionCounter <= positionsToPlace; positionCounter++)
             {
                 int xCoordinate;
                 int yCoordinate;
-                if(backwardsDiagonal)
+
+                if (IsMixedDiagonalLineGoingTowardsX(coordinates))
                 {
-                    if(coordinates.endX == coordinates.endY)
-                    {
-                        xCoordinate = coordinates.startX - positionCounter;
-                        yCoordinate = coordinates.startY - positionCounter;
-                    }
-                    else
-                    {
-                        xCoordinate = coordinates.startX + positionCounter;
-                        yCoordinate = coordinates.startY + positionCounter;
-                    }
-                    
-                } else
+                    xCoordinate = coordinates.startX + positionCounter;
+                    yCoordinate = coordinates.startY - positionCounter;
+                } 
+                else if(IsMixedDiagonalLineGoingTowardsY(coordinates))
                 {
-                    if(coordinates.startX < coordinates.endX)
-                    {
-                        xCoordinate = coordinates.startX + positionCounter;
-                        yCoordinate = coordinates.startY + positionCounter;
-                    } else
-                    {
-                        xCoordinate = coordinates.startX - positionCounter;
-                        yCoordinate = coordinates.startY + positionCounter;
-                    }
-                    
+                    xCoordinate = coordinates.startX - positionCounter;
+                    yCoordinate = coordinates.startY + positionCounter;
+                } 
+                else if(IsHomogenousPositiveDiagonalLine(coordinates))
+                {
+                    xCoordinate = coordinates.startX + positionCounter;
+                    yCoordinate = coordinates.startY + positionCounter;
+                } 
+                else if(IsHomogenousNegativeDiagonalLine(coordinates))
+                {
+                    xCoordinate = coordinates.startX - positionCounter;
+                    yCoordinate = coordinates.startY - positionCounter;
+                }
+                else
+                {
+                    throw new Exception();
                 }
 
                 if (!VerticalLineExist(yCoordinate))
@@ -106,12 +127,6 @@ namespace _5_Hydrothermal_Venture
 
         public (int startX, int startY, int endX, int endY) FlipLineToPositiveDirection((int startX, int startY, int endX, int endY) coordinates)
         {
-
-            if(LineIsDiagonal(coordinates))
-            {
-                return FlipDiagonalLine(coordinates);
-            }
-
             if (coordinates.startY < coordinates.startX &&
                 coordinates.startX == coordinates.endY &&
                 coordinates.startY == coordinates.endX)
@@ -132,33 +147,21 @@ namespace _5_Hydrothermal_Venture
             return coordinates;
         }
 
+        public bool IsHomogenousPositiveDiagonalLine((int startX, int startY, int endX, int endY) coordinates)
+        {
+            return ((coordinates.startX - coordinates.endX) == (coordinates.startY - coordinates.endY)) &&
+                (coordinates.startX < coordinates.endX) && (coordinates.startY < coordinates.endY);
+        }
+
+        public bool IsHomogenousNegativeDiagonalLine((int startX, int startY, int endX, int endY) coordinates)
+        {
+            return ((coordinates.startX - coordinates.endX) == (coordinates.startY - coordinates.endY)) &&
+                (coordinates.startX > coordinates.endX) && (coordinates.startY > coordinates.endY);
+        }
+
         private (int startX, int startY, int endX, int endY) FlipDiagonalLine((int startX, int startY, int endX, int endY) coordinates)
         {
             return (coordinates.endX, coordinates.endY, coordinates.startX, coordinates.startY);
-        }
-
-        private bool LineIsDiagonal((int startX, int startY, int endX, int endY) coordinates)
-        {
-            bool isDiagonal = false;
-
-            // same coords
-            if (
-                (coordinates.startX == coordinates.startY) && (coordinates.endX == coordinates.endY)
-                )
-                isDiagonal = true;
-
-            if (
-                (coordinates.startX - coordinates.endX) == (coordinates.startY - coordinates.endY) ||
-                (coordinates.endX - coordinates.startX) == (coordinates.endY - coordinates.startY)
-                )
-                isDiagonal = true;
-
-            return isDiagonal;
-        }
-
-        private bool LineNegativeDescend((int startX, int startY, int endX, int endY) coordinates)
-        {
-            return (coordinates.startX > coordinates.endX || coordinates.startY > coordinates.endY);
         }
 
         private void AddVerticalLine((int startX, int startY, int endX, int endY) coordinates)
