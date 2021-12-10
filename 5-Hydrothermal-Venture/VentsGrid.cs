@@ -31,37 +31,71 @@ namespace _5_Hydrothermal_Venture
 
         public void AddVentsLine((int startX, int startY, int endX, int endY) coordinates)
         {
-            if (LineNegativeDescend(coordinates))
-                coordinates = FlipLineToPositiveDirection(coordinates);
+            
+            coordinates = FlipLineToPositiveDirection(coordinates);
 
             if (coordinates.startY == coordinates.endY)
             {
                 AddHorizontalLine(coordinates);
             }
-            else if (coordinates.startX == coordinates.endX) 
+            else if (coordinates.startX == coordinates.endX)
             {
                 AddVerticalLine(coordinates);
             }
-            else if(UseDiagonal)
+            else if (UseDiagonal)
             {
                 AddDiagonalLine(coordinates);
-            }
-                
+            }   
 
+        }
 
+        private bool LineNotDiagonal((int startX, int startY, int endX, int endY) coordinates)
+        {
+            return !(((coordinates.startX == coordinates.startY) && (coordinates.endX == coordinates.endY)) ||
+                ((coordinates.startX == coordinates.endY) && (coordinates.endX == coordinates.startY)));
         }
 
         private void AddDiagonalLine((int startX, int startY, int endX, int endY) coordinates)
         {
-            int positionsToPlace = coordinates.endX - coordinates.startX;
+            int positionsToPlace = coordinates.startX > coordinates.endX ? (coordinates.startX - coordinates.endX) : (coordinates.endX - coordinates.startX);
 
-            for (int positionCounter = 0; positionCounter < positionsToPlace; positionCounter++)
+            bool backwardsDiagonal = false;
+            if ((coordinates.endX < coordinates.startX) && (coordinates.endY < coordinates.startY))
+                backwardsDiagonal = true;
+
+            for (int positionCounter = 0; positionCounter <= positionsToPlace; positionCounter++)
             {
-                var xCoordinate = coordinates.startX + positionCounter;
-                var yCoordinate = coordinates.startY + positionCounter;
+                int xCoordinate;
+                int yCoordinate;
+                if(backwardsDiagonal)
+                {
+                    if(coordinates.endX == coordinates.endY)
+                    {
+                        xCoordinate = coordinates.startX - positionCounter;
+                        yCoordinate = coordinates.startY - positionCounter;
+                    }
+                    else
+                    {
+                        xCoordinate = coordinates.startX + positionCounter;
+                        yCoordinate = coordinates.startY + positionCounter;
+                    }
+                    
+                } else
+                {
+                    if(coordinates.startX < coordinates.endX)
+                    {
+                        xCoordinate = coordinates.startX + positionCounter;
+                        yCoordinate = coordinates.startY + positionCounter;
+                    } else
+                    {
+                        xCoordinate = coordinates.startX - positionCounter;
+                        yCoordinate = coordinates.startY + positionCounter;
+                    }
+                    
+                }
 
-                if (!VerticalLineExist(xCoordinate))
-                    CreateVerticalLines(xCoordinate);
+                if (!VerticalLineExist(yCoordinate))
+                    CreateVerticalLines(yCoordinate);
 
                 if (!HorizontalLineExist(yCoordinate, xCoordinate))
                     CreateHorizontalPositions(yCoordinate, xCoordinate);
@@ -72,21 +106,54 @@ namespace _5_Hydrothermal_Venture
 
         public (int startX, int startY, int endX, int endY) FlipLineToPositiveDirection((int startX, int startY, int endX, int endY) coordinates)
         {
-            if(coordinates.startX > coordinates.endX)
+
+            if(LineIsDiagonal(coordinates))
             {
-                var temp = coordinates.startX;
-                coordinates.startX = coordinates.endX;
-                coordinates.endX = temp;
+                return FlipDiagonalLine(coordinates);
+            }
+
+            if (coordinates.startY < coordinates.startX &&
+                coordinates.startX == coordinates.endY &&
+                coordinates.startY == coordinates.endX)
+            {
+                return (coordinates.endY, coordinates.startY, coordinates.endX, coordinates.startX);
+            }
+
+            if (coordinates.startX > coordinates.endX)
+            {
+                return (coordinates.endX, coordinates.endY, coordinates.startX, coordinates.startY);
             }
 
             if(coordinates.startY > coordinates.endY)
             {
-                var temp = coordinates.startY;
-                coordinates.startY = coordinates.endY;
-                coordinates.endY = temp;
+                return (coordinates.endX, coordinates.endY, coordinates.startX, coordinates.startY);
             }
 
             return coordinates;
+        }
+
+        private (int startX, int startY, int endX, int endY) FlipDiagonalLine((int startX, int startY, int endX, int endY) coordinates)
+        {
+            return (coordinates.endX, coordinates.endY, coordinates.startX, coordinates.startY);
+        }
+
+        private bool LineIsDiagonal((int startX, int startY, int endX, int endY) coordinates)
+        {
+            bool isDiagonal = false;
+
+            // same coords
+            if (
+                (coordinates.startX == coordinates.startY) && (coordinates.endX == coordinates.endY)
+                )
+                isDiagonal = true;
+
+            if (
+                (coordinates.startX - coordinates.endX) == (coordinates.startY - coordinates.endY) ||
+                (coordinates.endX - coordinates.startX) == (coordinates.endY - coordinates.startY)
+                )
+                isDiagonal = true;
+
+            return isDiagonal;
         }
 
         private bool LineNegativeDescend((int startX, int startY, int endX, int endY) coordinates)

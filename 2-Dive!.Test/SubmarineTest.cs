@@ -88,6 +88,7 @@ namespace _2_Dive_.Test
             submarine.Move("down 2");
 
             Assert.AreEqual(2, submarine.Aim);
+
             Assert.AreEqual(0, submarine.Depth);
         }
 
