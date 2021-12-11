@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-The-Treachery-of-Whales",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-The-Treachery-of-Whales.Test", "7-The-Treachery-of-Whales.Test\7-The-Treachery-of-Whales.Test.csproj", "{95E73FE2-F89A-409A-9BC0-7D11784DB07A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8-Seven-Segment-Search", "8-Seven-Segment-Search\8-Seven-Segment-Search.csproj", "{1D357A68-313E-4A25-8A21-32760D318729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8-Seven-Segment-Search.Test", "8-Seven-Segment-Search.Test\8-Seven-Segment-Search.Test.csproj", "{B909A3E1-FA59-433D-9971-DF7D185873BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +97,14 @@ Global
 		{95E73FE2-F89A-409A-9BC0-7D11784DB07A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95E73FE2-F89A-409A-9BC0-7D11784DB07A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95E73FE2-F89A-409A-9BC0-7D11784DB07A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D357A68-313E-4A25-8A21-32760D318729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D357A68-313E-4A25-8A21-32760D318729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D357A68-313E-4A25-8A21-32760D318729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D357A68-313E-4A25-8A21-32760D318729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B909A3E1-FA59-433D-9971-DF7D185873BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B909A3E1-FA59-433D-9971-DF7D185873BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B909A3E1-FA59-433D-9971-DF7D185873BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B909A3E1-FA59-433D-9971-DF7D185873BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
