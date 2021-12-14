@@ -21,9 +21,9 @@ namespace _10_Syntax_Scoring.Test
 
             syntaxChecker.LoadFile(LoadFileLinesFromFile("smallTest.txt"));
 
-            string[] fileLines = syntaxChecker.FileLines;
+            List<string> fileLines = syntaxChecker.FileLines;
 
-            Assert.AreEqual(10, fileLines.Length);
+            Assert.AreEqual(10, fileLines.Count);
         }
 
         [TestMethod]
@@ -68,6 +68,59 @@ namespace _10_Syntax_Scoring.Test
 
             syntaxChecker.LoadFile(LoadFileLinesFromFile("fullTest.txt"));
             int score = syntaxChecker.CalculateScore();
+
+            Console.WriteLine(score);
+        }
+
+        [TestMethod]
+        public void TestSyntaxCheckerDiscardIncompleteLines()
+        {
+            SyntaxChecker syntaxChecker = new SyntaxChecker();
+
+            syntaxChecker.LoadFile(LoadFileLinesFromFile("smallTest.txt"));
+            syntaxChecker.DiscardIncompleteLines();
+
+            Assert.AreEqual(5, syntaxChecker.FileLines.Count);
+        }
+
+        [TestMethod]
+        public void TestSyntaxCheckerCalculateMissingCharacters()
+        {
+            SyntaxChecker syntaxChecker = new SyntaxChecker();
+
+            syntaxChecker.LoadFile(LoadFileLinesFromFile("smallTest.txt"));
+            syntaxChecker.DiscardIncompleteLines();
+
+            List<char> missingCharacters = syntaxChecker.CalculateMissingCharacters(0);
+
+            List<char> correctMissingCharacters = new List<char> { '}', '}', ']', ']', ')', '}', ')', ']' };
+
+            for (int index = 0; index < missingCharacters.Count; index++)
+                Assert.AreEqual(correctMissingCharacters[index], missingCharacters[index]);
+        }
+
+        [TestMethod]
+        public void TestSyntaxCheckerCalculateMissingCharacterScore()
+        {
+            SyntaxChecker syntaxChecker = new SyntaxChecker();
+
+            syntaxChecker.LoadFile(LoadFileLinesFromFile("smallTest.txt"));
+            syntaxChecker.DiscardIncompleteLines();
+
+            long score = syntaxChecker.CalculateMissingCharactersMiddleScore();
+
+            Assert.AreEqual(288957, score);
+        }
+
+        [TestMethod]
+        public void TestSyntaxCheckerCalculateMissingCharacterScoreFullTest()
+        {
+            SyntaxChecker syntaxChecker = new SyntaxChecker();
+
+            syntaxChecker.LoadFile(LoadFileLinesFromFile("fullTest.txt"));
+            syntaxChecker.DiscardIncompleteLines();
+
+            long score = syntaxChecker.CalculateMissingCharactersMiddleScore();
 
             Console.WriteLine(score);
         }
