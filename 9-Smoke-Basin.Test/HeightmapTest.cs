@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _9_Smoke_Basin.Test
 {
@@ -121,6 +122,88 @@ namespace _9_Smoke_Basin.Test
             Console.WriteLine(riskLevel);
         }
 
+        [TestMethod]
+        public void TestHeightmapGetLowPointIndicesForSingleRow()
+        {
+            Heightmap heightmap = new Heightmap();
+            string[] mapInput = LoadMapFromFile("smallTest.txt");
+            heightmap.LoadMap(mapInput);
+
+            List<int> lowPoints = heightmap.FindLowPointsFirstLine();
+
+            var lowPointCoordinates1 = heightmap.LowPointIndices[0];
+            var lowPointCoordinates2 = heightmap.LowPointIndices[1];
+
+            Assert.AreEqual(heightmap.Map[lowPointCoordinates1.row][lowPointCoordinates1.column], lowPoints[0]);
+            Assert.AreEqual(heightmap.Map[lowPointCoordinates2.row][lowPointCoordinates2.column], lowPoints[1]);
+        }
+
+        [TestMethod]
+        public void TestHeightmapFindAdjacentHeights()
+        {
+            Heightmap heightmap = new Heightmap();
+            string[] mapInput = LoadMapFromFile("smallTest.txt");
+            heightmap.LoadMap(mapInput);
+
+            List<(int row, int column)> positions = heightmap.FindAdjacentHeights((0, 1));
+
+            Assert.AreEqual(3, positions.Count);
+        }
+
+        [TestMethod]
+        public void TestHeightmapFindAdjacentHeightsRightCorner()
+        {
+            Heightmap heightmap = new Heightmap();
+            string[] mapInput = LoadMapFromFile("smallTest.txt");
+            heightmap.LoadMap(mapInput);
+
+            List<(int row, int column)> positions = heightmap.FindAdjacentHeights((0, 9));
+            Assert.AreEqual(9, positions.Count);
+        }
+
+        [TestMethod]
+        public void TestHeightmapCalculateBasinSize()
+        {
+            Heightmap heightmap = new Heightmap();
+            string[] mapInput = LoadMapFromFile("smallTest.txt");
+            heightmap.LoadMap(mapInput);
+
+            int size = heightmap.CalculateBasinSize((0, 1));
+
+            Assert.AreEqual(3, size);
+        }
+
+        [TestMethod]
+        public void TestHeightmapFindBiggestBasin()
+        {
+            Heightmap heightmap = new Heightmap();
+            string[] mapInput = LoadMapFromFile("smallTest.txt");
+            heightmap.LoadMap(mapInput);
+
+            List<int> sizes = heightmap.FindSizeOfThreeLargestBasins();
+
+            int[] correctSizes = new int[] { 14, 9, 9 };
+            for (int index = 0; index < correctSizes.Length; index++)
+                Assert.AreEqual(correctSizes[index], sizes[index]);
+            int sum = sizes.Aggregate((number1, number2) => number1 * number2);
+
+            Assert.AreEqual(1134, sum);
+        }
+
+        [TestMethod]
+        public void TestHeightmapFindBiggestBasinSumFullTest()
+        {
+            Heightmap heightmap = new Heightmap();
+            string[] mapInput = LoadMapFromFile("fullTest.txt");
+            heightmap.LoadMap(mapInput);
+
+            List<int> sizes = heightmap.FindSizeOfThreeLargestBasins();
+
+            int sum = sizes.Aggregate((number1, number2) => number1 * number2);
+
+            Console.WriteLine(sum);
+
+        }
 
         private string[] LoadMapFromFile(string path)
         {
