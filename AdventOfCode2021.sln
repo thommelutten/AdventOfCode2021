@@ -23,17 +23,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-Hydrothermal-Venture", "5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-Hydrothermal-Venture.Test", "5-Hydrothermal-Venture.Test\5-Hydrothermal-Venture.Test.csproj", "{37C7E4BD-CB06-40B3-B22D-52C02F4DA31E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-Lanternfish", "6-Lanternfish\6-Lanternfish.csproj", "{371499E1-644F-4C42-9BC2-99D65DD08BFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6-Lanternfish", "6-Lanternfish\6-Lanternfish.csproj", "{371499E1-644F-4C42-9BC2-99D65DD08BFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-Lanternfish.Test", "6-Lanternfish.Test\6-Lanternfish.Test.csproj", "{139BF4A1-DD42-466E-8B68-9A811C4B7E55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6-Lanternfish.Test", "6-Lanternfish.Test\6-Lanternfish.Test.csproj", "{139BF4A1-DD42-466E-8B68-9A811C4B7E55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-The-Treachery-of-Whales", "7-The-Treachery-of-Whales\7-The-Treachery-of-Whales.csproj", "{0B997C4B-1CC2-4500-9643-579A72440AAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "7-The-Treachery-of-Whales", "7-The-Treachery-of-Whales\7-The-Treachery-of-Whales.csproj", "{0B997C4B-1CC2-4500-9643-579A72440AAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-The-Treachery-of-Whales.Test", "7-The-Treachery-of-Whales.Test\7-The-Treachery-of-Whales.Test.csproj", "{95E73FE2-F89A-409A-9BC0-7D11784DB07A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "7-The-Treachery-of-Whales.Test", "7-The-Treachery-of-Whales.Test\7-The-Treachery-of-Whales.Test.csproj", "{95E73FE2-F89A-409A-9BC0-7D11784DB07A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8-Seven-Segment-Search", "8-Seven-Segment-Search\8-Seven-Segment-Search.csproj", "{1D357A68-313E-4A25-8A21-32760D318729}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8-Seven-Segment-Search", "8-Seven-Segment-Search\8-Seven-Segment-Search.csproj", "{1D357A68-313E-4A25-8A21-32760D318729}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8-Seven-Segment-Search.Test", "8-Seven-Segment-Search.Test\8-Seven-Segment-Search.Test.csproj", "{B909A3E1-FA59-433D-9971-DF7D185873BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8-Seven-Segment-Search.Test", "8-Seven-Segment-Search.Test\8-Seven-Segment-Search.Test.csproj", "{B909A3E1-FA59-433D-9971-DF7D185873BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9-Smoke-Basin", "9-Smoke-Basin\9-Smoke-Basin.csproj", "{3E027C82-79A3-4F4B-9803-F5195FAE2449}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9-Smoke-Basin.Test", "9-Smoke-Basin.Test\9-Smoke-Basin.Test.csproj", "{87F3AAFE-E75F-4CDF-97D1-73A3DD4E12E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +109,14 @@ Global
 		{B909A3E1-FA59-433D-9971-DF7D185873BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B909A3E1-FA59-433D-9971-DF7D185873BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B909A3E1-FA59-433D-9971-DF7D185873BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E027C82-79A3-4F4B-9803-F5195FAE2449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E027C82-79A3-4F4B-9803-F5195FAE2449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E027C82-79A3-4F4B-9803-F5195FAE2449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E027C82-79A3-4F4B-9803-F5195FAE2449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87F3AAFE-E75F-4CDF-97D1-73A3DD4E12E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F3AAFE-E75F-4CDF-97D1-73A3DD4E12E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F3AAFE-E75F-4CDF-97D1-73A3DD4E12E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F3AAFE-E75F-4CDF-97D1-73A3DD4E12E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -191,6 +191,7 @@ namespace _4_Giant_Squid.Test
 
                     foreach (var boardIndex in bingo.WinningBoardIndices)
                         bingo.RemoveBoard(boardIndex);
+
                     bingo.ClearWinningBoardIndices();
                     bingo.ContinueGame();
                 }

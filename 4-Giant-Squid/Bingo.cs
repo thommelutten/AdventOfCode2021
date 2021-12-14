@@ -58,6 +58,7 @@ namespace _4_Giant_Squid
             List<Board> winningBoards = new List<Board>();
             foreach (var index in WinningBoardIndices)
                 winningBoards.Add(Boards.ElementAt(index));
+
             return winningBoards;
         }
 
