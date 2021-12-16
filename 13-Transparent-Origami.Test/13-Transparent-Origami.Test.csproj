@@ -18,4 +18,10 @@
     <ProjectReference Include="..\13-Transparent-Origami\13-Transparent-Origami.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="smallTest.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
