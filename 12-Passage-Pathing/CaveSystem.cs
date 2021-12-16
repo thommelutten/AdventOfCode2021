@@ -10,6 +10,8 @@ namespace _12_Passage_Pathing
         public List<(string start, string destination)> CaveConnections { get; private set; } = new List<(string start, string destination)>();
         public List<CaveRoute> WalkedCaveRoutes { get; set; } = new List<CaveRoute>();
 
+        public bool SingleSmallCaveCanBeVisitedTwice { get; private set; }  = false;
+
         public void LoadRoutes(string[] routes)
         {
             foreach(var route in routes)
@@ -45,6 +47,11 @@ namespace _12_Passage_Pathing
                     continue;
                 }
 
+                if (walkedCaveRoute.TraversedPaths.Count == 7)
+                {
+                    var a = 2;
+                }
+
                 var availableRoutesFromCurrentCave = CaveConnections.Where(caveConnection => caveConnection.start.Equals(walkedCaveRoute.GetCurrentCave()) || caveConnection.destination.Equals(walkedCaveRoute.GetCurrentCave())).ToList();
                 
                 foreach (var availableRoute in availableRoutesFromCurrentCave)
@@ -58,9 +65,22 @@ namespace _12_Passage_Pathing
                         start = availableRoute.destination;
                     }
 
-                    if (walkedCaveRoute.HasPreviouslyVisitedCave(destination) &&
-                        IsSmallCave(destination))
+                    if (destination.Equals("start"))
                         continue;
+
+                    if(SingleSmallCaveCanBeVisitedTwice)
+                    {
+                        if (CaveRouteHasVisitedASmallCaveTwice(walkedCaveRoute) && 
+                            IsSmallCave(destination) && 
+                            walkedCaveRoute.HasPreviouslyVisitedCave(destination))
+                            continue;
+                    } 
+                    else
+                    {
+                        if (walkedCaveRoute.HasPreviouslyVisitedCave(destination) &&
+                        IsSmallCave(destination))
+                            continue;
+                    }
 
                     CaveRoute updatedRoute = new CaveRoute();
                     foreach (var route in walkedCaveRoute.TraversedPaths)
@@ -69,8 +89,6 @@ namespace _12_Passage_Pathing
                     
                     updatedRoute.AddPath(start, destination);
                     
-
-
                     updatedWalkedCaveRoutes.Add(updatedRoute);
                 }
                 
@@ -78,11 +96,28 @@ namespace _12_Passage_Pathing
             WalkedCaveRoutes = updatedWalkedCaveRoutes;
         }
 
-        private bool IsSmallCave(string destination)
+        public bool CaveRouteHasVisitedASmallCaveTwice(CaveRoute walkedCaveRoute)
+        {
+            var cavesVisited = walkedCaveRoute.GetCavesPreviouslyVisited();
+
+            var smallCaves = cavesVisited.Where(cave => IsSmallCave(cave)).ToList();
+
+            var uniqueSmallCaves = smallCaves.Distinct().ToList();
+
+            foreach (var uniqueSmallCave in uniqueSmallCaves)
+                if(smallCaves.Where(smallCave => smallCave.Equals(uniqueSmallCave)).Count() > 1) {
+                    return true;
+                }
+
+            return false;
+        }
+
+        public bool IsSmallCave(string destination)
         {
             foreach(char c in destination)
             {
-                if (char.IsUpper(c)) return false;
+                if (char.IsUpper(c)) 
+                    return false;
             }
 
             return true;
@@ -99,6 +134,11 @@ namespace _12_Passage_Pathing
         private bool NotAllRoundsDiscovered()
         {
             return WalkedCaveRoutes.Where(caveRoute => !caveRoute.HasReachedEnd()).Any();
+        }
+
+        public void AllowSingleSmallCaveToBeVisitedTwice()
+        {
+            SingleSmallCaveCanBeVisitedTwice = true;
         }
     }
 }

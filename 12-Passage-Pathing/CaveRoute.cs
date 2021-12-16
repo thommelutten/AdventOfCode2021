@@ -21,7 +21,7 @@ namespace _12_Passage_Pathing
         public bool HasPreviouslyVisitedCave(string destination)
         {
             foreach(var TraversedPath in TraversedPaths)
-                if(TraversedPath.start.Equals(destination) || TraversedPath.destination.Equals(destination))
+                if(TraversedPath.start.Equals(destination))
                     return true;
             return false;
         }
@@ -29,6 +29,19 @@ namespace _12_Passage_Pathing
         public string GetCurrentCave()
         {
             return TraversedPaths[^1].destination;
+        }
+
+        public List<string> GetCavesPreviouslyVisited()
+        {
+            List<string> cavesVisited = new List<string>();
+
+            foreach (var traversedPath in TraversedPaths)
+                cavesVisited.Add(traversedPath.start);
+
+            cavesVisited.Add(GetCurrentCave());
+                
+
+            return cavesVisited;
         }
     }
 }

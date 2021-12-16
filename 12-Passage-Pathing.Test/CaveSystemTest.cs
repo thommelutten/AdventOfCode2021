@@ -121,6 +121,74 @@ namespace _12_Passage_Pathing.Test
             Console.WriteLine(caveSystem.WalkedCaveRoutes.Count);
         }
 
+        [TestMethod]
+        public void TestCaveSystemAllowSingleSmallCaveToBeVisitedTwice()
+        {
+            CaveSystem caveSystem = new CaveSystem();
+
+            caveSystem.AllowSingleSmallCaveToBeVisitedTwice();
+
+            Assert.IsTrue(caveSystem.SingleSmallCaveCanBeVisitedTwice);
+        }
+
+        [TestMethod]
+        public void TestCaveSystemFindAllRoutesAllowTwiceVisitation()
+        {
+            CaveSystem caveSystem = InitializeCaveSystem("smallTest.txt");
+
+            caveSystem.AllowSingleSmallCaveToBeVisitedTwice();
+            caveSystem.FindAllRoutes();
+
+            Assert.AreEqual(36, caveSystem.WalkedCaveRoutes.Count);
+        }
+
+        [TestMethod]
+        public void TestCaveSystemFindAllRoutesAllowTwiceVisitationMiddleSizedTest()
+        {
+            CaveSystem caveSystem = InitializeCaveSystem("middleSizedTest.txt");
+
+            caveSystem.AllowSingleSmallCaveToBeVisitedTwice();
+            caveSystem.FindAllRoutes();
+
+            Assert.AreEqual(103, caveSystem.WalkedCaveRoutes.Count);
+        }
+
+        [TestMethod]
+        public void TestCaveRouteHasVisitedASmallCaveTwice()
+        {
+            CaveSystem caveSystem = new CaveSystem();
+            CaveRoute caveRoute = new CaveRoute();
+            caveRoute.AddPath("start", "a");
+            caveRoute.AddPath("a", "b");
+            caveRoute.AddPath("b", "C");
+            caveRoute.AddPath("C", "a");
+            caveRoute.AddPath("a", "C");
+
+            Assert.IsTrue(caveSystem.CaveRouteHasVisitedASmallCaveTwice(caveRoute));
+        }
+
+        [TestMethod]
+        public void TestCaveSystemFindAllRoutesAllowTwiceVisitatioLargeTest()
+        {
+            CaveSystem caveSystem = InitializeCaveSystem("largeTest.txt");
+
+            caveSystem.AllowSingleSmallCaveToBeVisitedTwice();
+            caveSystem.FindAllRoutes();
+
+            Assert.AreEqual(3509, caveSystem.WalkedCaveRoutes.Count);
+        }
+
+        [TestMethod]
+        public void TestCaveSystemFindAllRoutesAllowTwiceVisitatioFullTest()
+        {
+            CaveSystem caveSystem = InitializeCaveSystem("fullTest.txt");
+
+            caveSystem.AllowSingleSmallCaveToBeVisitedTwice();
+            caveSystem.FindAllRoutes();
+
+            Console.WriteLine(caveSystem.WalkedCaveRoutes.Count);
+        }
+
         private CaveSystem InitializeCaveSystem(string path)
         {
             CaveSystem caveSystem = new CaveSystem();

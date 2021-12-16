@@ -102,5 +102,35 @@ namespace _12_Passage_Pathing.Test
             var currentCave = caveRoute.GetCurrentCave();
             Assert.AreEqual("a", currentCave);
         }
+
+        [TestMethod]
+        public void TestCaveRouteGetCavesVisited()
+        {
+            CaveRoute caveRoute = new CaveRoute();
+
+            string start = "start";
+            string end = "A";
+            caveRoute.AddPath(start, end);
+
+            start = "A";
+            end = "b";
+            caveRoute.AddPath(start, end);
+
+            start = "b";
+            end = "A";
+            caveRoute.AddPath(start, end);
+
+            start = "A";
+            end = "c";
+            caveRoute.AddPath(start, end);
+
+            List<string> cavesVisited = caveRoute.GetCavesPreviouslyVisited();
+
+            Assert.AreEqual("start", cavesVisited[0]);
+            Assert.AreEqual("A", cavesVisited[1]);
+            Assert.AreEqual("b", cavesVisited[2]);
+            Assert.AreEqual("A", cavesVisited[3]);
+
+        }
     }
 }
